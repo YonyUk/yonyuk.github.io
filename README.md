@@ -11,6 +11,7 @@ I am a developer focused on building software with clean architecture. My primar
 *   **🧠 [PyLGEN](https://github.com/YonyUk/pylgen)**: A Python framework for building compilers and interpreters, published on PyPI with documentation in **ReadTheDocs**.
 *   **🎵 [ThePlaylist-backend](https://github.com/YonyUk/ThePlaylist-backend)**: A robust backend built with **FastAPI**, **SQLAlchemy**, and **PostgreSQL**. It implements advanced patterns such as the **Circuit Breaker** for resilience, along with secure authentication using JWT.
 *   **🎨 [ThePlaylist-frontend](https://github.com/YonyUk/ThePlaylist-frontend)**: A modern user interface built with **React 18** and **TypeScript**, featuring predictable state management and clean component design.
+*   **🍾 [iParty-backend](https://github.com/YonyUk/iParty-backend)**: A scalable backend built with **.NET (C#)** and **Entity Framework Core**. It follows a **microservices architecture** with a Gateway API and containerization via **Docker**.
 
 ---
 
@@ -26,5 +27,5 @@ I am a developer focused on building software with clean architecture. My primar
 
 ### 📫 Connect with me
 
-*   **LinkedIn:** [Your LinkedIn profile](https://linkedin.com/in/tu-perfil)
+*   **LinkedIn:** [Yonatan](https://www.linkedin.com/in/yonatan-jose-guerra-perez-291826314)
 *   **GitHub:** You’re already here! 😄
