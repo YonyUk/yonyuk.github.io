@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yonatan — Full-Stack Developer</title>
+  <meta name="description" content="Full-Stack Developer. Creator of PyLGEN. Building AI agents with LangGraph." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --bg-alt: #111820;
+      --card: #151d27;
+      --text: #e6edf3;
+      --muted: #8b98a5;
+      --accent: #58a6ff;
+      --accent-2: #7ee787;
+      --border: #22303f;
+      --radius: 12px;
+      --max: 1080px;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; transition: color .2s; }
+    a:hover { color: var(--accent-2); }
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+    /* Nav */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(11,15,20,.82);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .container { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .logo { font-weight: 700; font-family: var(--mono); letter-spacing: -.5px; }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 22px; font-size: .92rem; }
+    .nav-links a { color: var(--muted); }
+    .nav-links a:hover { color: var(--text); }
+    @media (max-width: 640px) { .nav-links { display: none; } }
+
+    /* Hero */
+    header.hero { padding: 90px 0 70px; position: relative; overflow: hidden; }
+    .hero::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(600px circle at 20% 0%, rgba(88,166,255,.10), transparent 60%);
+      pointer-events: none;
+    }
+    .hero .container { position: relative; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .78rem; font-family: var(--mono);
+      color: var(--accent-2);
+      background: rgba(126,231,135,.08);
+      border: 1px solid rgba(126,231,135,.25);
+      padding: 5px 12px; border-radius: 999px; margin-bottom: 24px;
+    }
+    .badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent-2); box-shadow: 0 0 8px var(--accent-2); }
+    h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 18px; }
+    h1 .grad { background: linear-gradient(120deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p.lead { font-size: 1.15rem; color: var(--muted); max-width: 680px; margin-bottom: 32px; }
+    .hero p.lead strong { color: var(--text); }
+    .cta { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 20px; border-radius: 8px; font-weight: 600; font-size: .95rem;
+      border: 1px solid var(--border); transition: all .2s;
+    }
+    .btn.primary { background: var(--accent); color: #051018; border-color: var(--accent); }
+    .btn.primary:hover { background: var(--accent-2); border-color: var(--accent-2); color: #051018; }
+    .btn.ghost { color: var(--text); }
+    .btn.ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Sections */
+    section { padding: 70px 0; border-top: 1px solid var(--border); }
+    .section-head { margin-bottom: 36px; }
+    .section-head .kicker { font-family: var(--mono); font-size: .8rem; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; }
+    .section-head h2 { font-size: 1.9rem; letter-spacing: -.8px; margin-top: 6px; }
+
+    /* About */
+    .about p { color: var(--muted); max-width: 780px; margin-bottom: 16px; }
+    .about p strong { color: var(--text); }
+    .about p code { font-family: var(--mono); font-size: .88em; background: var(--bg-alt); padding: 2px 6px; border-radius: 5px; color: var(--accent-2); }
+
+    /* Projects */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 24px; display: flex; flex-direction: column; transition: transform .2s, border-color .2s;
+    }
+    .card:hover { transform: translateY(-4px); border-color: var(--accent); }
+    .card .top { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .card .icon { font-size: 1.4rem; }
+    .card h3 { font-size: 1.1rem; letter-spacing: -.3px; }
+    .card .tag {
+      margin-left: auto; font-family: var(--mono); font-size: .7rem;
+      color: var(--muted); border: 1px solid var(--border); padding: 2px 8px; border-radius: 999px;
+    }
+    .card p { color: var(--muted); font-size: .93rem; flex: 1; margin-bottom: 18px; }
+    .card p strong { color: var(--text); }
+    .card .links { display: flex; gap: 16px; font-size: .88rem; font-weight: 600; }
+    .card .links a { display: inline-flex; align-items: center; gap: 5px; }
+    .card .links a::after { content: "→"; transition: transform .2s; }
+    .card .links a:hover::after { transform: translateX(3px); }
+
+    /* Skills */
+    .skills-group { margin-bottom: 26px; }
+    .skills-group h4 { font-size: .82rem; font-family: var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 9px; }
+    .tag-pill {
+      font-size: .85rem; padding: 6px 14px; border-radius: 999px;
+      background: var(--bg-alt); border: 1px solid var(--border); color: var(--text);
+    }
+    .tag-pill.hot { border-color: rgba(88,166,255,.5); color: var(--accent); background: rgba(88,166,255,.07); }
+
+    /* Contact */
+    .contact { text-align: center; }
+    .contact p { color: var(--muted); max-width: 540px; margin: 0 auto 28px; }
+    .contact .cta { justify-content: center; }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border); padding: 30px 0; text-align: center; color: var(--muted); font-size: .85rem; }
+    footer code { font-family: var(--mono); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <div class="logo">yonyuk</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <div class="badge">Available for Full-Stack roles</div>
+      <h1>Hi, I'm Yonatan.<br>I build <span class="grad">software with clean architecture</span>.</h1>
+      <p class="lead">
+        Full-Stack Developer and creator of <strong>PyLGEN</strong>, a native Python framework for compilers and interpreters.
+        I work across <strong>Python, React and .NET</strong>, and I'm currently building autonomous
+        <strong>AI agents with LangGraph</strong>.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/YonyUk" target="_blank" rel="noopener">View GitHub →</a>
+        <a class="btn ghost" href="https://linkedin.com/in/yonyuk" target="_blank" rel="noopener">Connect on LinkedIn</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="container about">
+      <div class="section-head">
+        <div class="kicker">01 — About</div>
+        <h2>What I do</h2>
+      </div>
+      <p>
+        I focus on building software with <strong>clean architecture</strong> and well-justified technical decisions.
+        My main project is <strong>PyLGEN</strong>, a Python framework for building compilers and interpreters,
+        published on <strong>PyPI</strong> with documentation on <strong>ReadTheDocs</strong>.
+      </p>
+      <p>
+        On the backend I've built production-style services with <strong>FastAPI + SQLAlchemy</strong> and with
+        <strong>.NET (C#) + Entity Framework Core</strong>, applying patterns like <strong>Circuit Breaker</strong>,
+        <strong>Repository</strong> and <strong>JWT authentication</strong> in <strong>microservices</strong> deployments
+        orchestrated with <strong>Docker</strong>. On the frontend I work with <strong>React 18 + TypeScript</strong>.
+      </p>
+      <p>
+        Right now I'm expanding into AI engineering, specializing in <strong>multi-agent systems with LangGraph</strong>.
+        I'm looking for a team where I can contribute full-stack expertise and grow as an engineer building intelligent applications.
+      </p>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <div class="section-head">
+        <div class="kicker">02 — Projects</div>
+        <h2>Selected work</h2>
+      </div>
+      <div class="grid">
+
+        <article class="card">
+          <div class="top">
+            <span class="icon">🧠</span>
+            <h3>PyLGEN</h3>
+            <span class="tag">Python</span>
+          </div>
+          <p>
+            A native Python framework for building compilers, interpreters and DSLs. Published on <strong>PyPI</strong>,
+            documented on <strong>ReadTheDocs</strong>, with an <strong>LALR(1)</strong> parser and Cython-optimized runtime.
+          </p>
+          <div class="links">
+            <a href="https://github.com/YonyUk/pylgen" target="_blank" rel="noopener">Repository</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="top">
+            <span class="icon">🍾</span>
+            <h3>iParty-backend</h3>
+            <span class="tag">.NET</span>
+          </div>
+          <p>
+            Microservices backend built with <strong>.NET 9</strong>, <strong>YARP</strong> API Gateway and
+            <strong>Clean Architecture</strong>. Uses <strong>Entity Framework Core</strong>, <strong>PostgreSQL</strong>,
+            JWT auth and <strong>Docker Compose</strong>.
+          </p>
+          <div class="links">
+            <a href="https://github.com/YonyUk/iParty-backend" target="_blank" rel="noopener">Repository</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="top">
+            <span class="icon">🎵</span>
+            <h3>ThePlaylist — Backend</h3>
+            <span class="tag">FastAPI</span>
+          </div>
+          <p>
+            A robust API built with <strong>FastAPI</strong>, <strong>SQLAlchemy</strong> and <strong>PostgreSQL</strong>.
+            Implements the <strong>Circuit Breaker</strong> pattern for resilience and secure JWT authentication.
+          </p>
+          <div class="links">
+            <a href="https://github.com/YonyUk/ThePlaylist-backend" target="_blank" rel="noopener">Repository</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="top">
+            <span class="icon">🎨</span>
+            <h3>ThePlaylist — Frontend</h3>
+            <span class="tag">React</span>
+          </div>
+          <p>
+            A modern UI built with <strong>React 18</strong> and <strong>TypeScript</strong>, with predictable state
+            management via <code>useReducer</code> and a clean component architecture.
+          </p>
+          <div class="links">
+            <a href="https://github.com/YonyUk/ThePlaylist-frontend" target="_blank" rel="noopener">Repository</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <div class="section-head">
+        <div class="kicker">03 — Skills</div>
+        <h2>Tech stack</h2>
+      </div>
+
+      <div class="skills-group">
+        <h4>Languages</h4>
+        <div class="tags">
+          <span class="tag-pill hot">Python</span>
+          <span class="tag-pill hot">TypeScript</span>
+          <span class="tag-pill hot">C#</span>
+          <span class="tag-pill">JavaScript</span>
+          <span class="tag-pill">SQL</span>
+        </div>
+      </div>
+
+      <div class="skills-group">
+        <h4>Backend</h4>
+        <div class="tags">
+          <span class="tag-pill">FastAPI</span>
+          <span class="tag-pill">.NET</span>
+          <span class="tag-pill">Entity Framework Core</span>
+          <span class="tag-pill">SQLAlchemy</span>
+          <span class="tag-pill">Pydantic</span>
+          <span class="tag-pill">YARP</span>
+        </div>
+      </div>
+
+      <div class="skills-group">
+        <h4>Frontend</h4>
+        <div class="tags">
+          <span class="tag-pill">React 18</span>
+          <span class="tag-pill">TypeScript</span>
+          <span class="tag-pill">HTML5</span>
+          <span class="tag-pill">CSS3</span>
+        </div>
+      </div>
+
+      <div class="skills-group">
+        <h4>AI & Data</h4>
+        <div class="tags">
+          <span class="tag-pill hot">LangGraph</span>
+          <span class="tag-pill">LangChain</span>
+          <span class="tag-pill">RAG</span>
+        </div>
+      </div>
+
+      <div class="skills-group">
+        <h4>Tools & Concepts</h4>
+        <div class="tags">
+          <span class="tag-pill">Docker</span>
+          <span class="tag-pill">Git</span>
+          <span class="tag-pill">Microservices</span>
+          <span class="tag-pill">Clean Architecture</span>
+          <span class="tag-pill">Circuit Breaker</span>
+          <span class="tag-pill">JWT</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container contact">
+      <div class="section-head" style="text-align:center">
+        <div class="kicker">04 — Contact</div>
+        <h2>Let's build something</h2>
+      </div>
+      <p>
+        I'm open to Full-Stack roles and collaborations. The fastest way to reach me is through LinkedIn or GitHub.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="https://linkedin.com/in/yonyuk" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/YonyUk" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      Built with <code>HTML</code>, <code>CSS</code> &amp; <code>JS</code> · Hosted on GitHub Pages · © <span id="year"></span> Yonatan
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
